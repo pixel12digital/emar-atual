@@ -169,7 +169,7 @@ export function ProductCard({
                     : "text-muted-foreground"
                 )}
               />
-              <span className="sr-only">Add to wishlist</span>
+              <span className="sr-only">Adicionar à lista de desejos</span>
             </Button>
           </div>
 
@@ -202,26 +202,25 @@ export function ProductCard({
           </CardContent>
 
           {variant === "default" && (
-            <CardFooter className="p-4 pt-0">
+            <CardFooter className="flex-col items-start p-4 pt-0">
+              {!product.inStock && (
+                <Badge className="mb-2" variant="destructive">
+                  Esgotado
+                </Badge>
+              )}
               <Button
-                className={cn(
-                  "w-full gap-2 transition-all",
-                  isAddingToCart && "opacity-70"
-                )}
-                disabled={isAddingToCart}
+                className="w-full"
+                disabled={!product.inStock || isAddingToCart}
                 onClick={handleAddToCart}
+                size="sm"
+                variant={isAddingToCart ? "outline" : "default"}
               >
-                {isAddingToCart ? (
-                  <div
-                    className={`
-                      h-4 w-4 animate-spin rounded-full border-2
-                      border-background border-t-transparent
-                    `}
-                  />
-                ) : (
-                  <ShoppingCart className="h-4 w-4" />
-                )}
-                Add to Cart
+                <ShoppingCart
+                  className={cn("mr-2 h-4 w-4", {
+                    "animate-spin": isAddingToCart,
+                  })}
+                />
+                {isAddingToCart ? "Adicionando..." : "Adicionar ao carrinho"}
               </Button>
             </CardFooter>
           )}
@@ -260,19 +259,6 @@ export function ProductCard({
                 </Button>
               </div>
             </CardFooter>
-          )}
-
-          {!product.inStock && (
-            <div
-              className={`
-                absolute inset-0 flex items-center justify-center
-                bg-background/80 backdrop-blur-sm
-              `}
-            >
-              <Badge className="px-3 py-1 text-sm" variant="destructive">
-                Out of Stock
-              </Badge>
-            </div>
           )}
         </Card>
       </Link>

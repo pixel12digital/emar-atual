@@ -91,19 +91,19 @@ export function HeaderUserDropdown({
         <DropdownMenuItem asChild>
           <Link className="cursor-pointer" href="/dashboard/stats">
             <BarChart className="mr-2 h-4 w-4" />
-            Stats
+            Estatísticas
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link className="cursor-pointer" href="/dashboard/profile">
             <UserIcon className="mr-2 h-4 w-4" />
-            Profile
+            Perfil
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link className="cursor-pointer" href="/dashboard/settings">
             <Settings className="mr-2 h-4 w-4" />
-            Settings
+            Configurações
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
@@ -133,7 +133,7 @@ export function HeaderUserDropdown({
         >
           <Link href="/auth/sign-out">
             <LogOut className="mr-2 h-4 w-4" />
-            Log out
+            Sair
           </Link>
         </DropdownMenuItem>
       </DropdownMenuContent>

@@ -34,7 +34,7 @@ export function SignInPageClient() {
       });
       router.push(SYSTEM_CONFIG.redirectAfterSignIn);
     } catch (err) {
-      setError("Invalid email or password");
+      setError("Email ou senha inválidos");
       console.error(err);
     } finally {
       setLoading(false);
@@ -46,7 +46,7 @@ export function SignInPageClient() {
     try {
       void signIn.social({ provider: "github" });
     } catch (err) {
-      setError("Failed to sign in with GitHub");
+      setError("Falha ao entrar com o GitHub");
       console.error(err);
       setLoading(false);
     }
@@ -57,7 +57,7 @@ export function SignInPageClient() {
     try {
       void signIn.social({ provider: "google" });
     } catch (err) {
-      setError("Failed to sign in with Google");
+      setError("Falha ao entrar com o Google");
       console.error(err);
       setLoading(false);
     }
@@ -112,9 +112,9 @@ export function SignInPageClient() {
               md:text-left
             `}
           >
-            <h2 className="text-3xl font-bold">Sign In</h2>
+            <h2 className="text-3xl font-bold">Entrar</h2>
             <p className="text-sm text-muted-foreground">
-              Enter your credentials to access your account
+              Insira suas credenciais para acessar sua conta
             </p>
           </div>
 
@@ -142,7 +142,7 @@ export function SignInPageClient() {
                 </div>
                 <div className="grid gap-2">
                   <div className="flex items-center justify-between">
-                    <Label htmlFor="password">Password</Label>
+                    <Label htmlFor="password">Senha</Label>
                     <Link
                       className={`
                         text-sm text-muted-foreground
@@ -150,7 +150,7 @@ export function SignInPageClient() {
                       `}
                       href="#"
                     >
-                      Forgot password?
+                      Esqueceu a senha?
                     </Link>
                   </div>
                   <Input
@@ -169,7 +169,7 @@ export function SignInPageClient() {
                   </div>
                 )}
                 <Button className="w-full" disabled={loading} type="submit">
-                  {loading ? "Signing in..." : "Sign in"}
+                  {loading ? "Entrando..." : "Entrar"}
                 </Button>
               </form>
               <div className="relative mt-6">
@@ -178,7 +178,7 @@ export function SignInPageClient() {
                 </div>
                 <div className="relative flex justify-center text-xs uppercase">
                   <span className="bg-background px-2 text-muted-foreground">
-                    Or continue with
+                    Ou continue com
                   </span>
                 </div>
               </div>
@@ -203,15 +203,9 @@ export function SignInPageClient() {
                 </Button>
               </div>
               <div className="mt-6 text-center text-sm text-muted-foreground">
-                Don't have an account?{" "}
-                <Link
-                  className={`
-                    text-primary underline-offset-4
-                    hover:underline
-                  `}
-                  href="/auth/sign-up"
-                >
-                  Sign up
+                Não tem uma conta?{" "}
+                <Link className="font-semibold hover:underline" href="/auth/sign-up">
+                  Cadastre-se
                 </Link>
               </div>
             </CardContent>

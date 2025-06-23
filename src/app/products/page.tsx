@@ -39,51 +39,51 @@ const slugify = (str: string) =>
 
 const products: Product[] = [
   {
-    category: "Audio",
+    category: "Áudio",
     id: "1",
     image:
       "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
     inStock: true,
-    name: "Premium Wireless Headphones",
+    name: "Fones de Ouvido Premium Sem Fio",
     originalPrice: 249.99,
     price: 199.99,
     rating: 4.5,
   },
   {
-    category: "Wearables",
+    category: "Vestíveis",
     id: "2",
     image:
       "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
     inStock: true,
-    name: "Smart Watch Series 5",
+    name: "Smart Watch Série 5",
     originalPrice: 349.99,
     price: 299.99,
     rating: 4.2,
   },
   {
-    category: "Photography",
+    category: "Fotografia",
     id: "3",
     image:
       "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
     inStock: false,
-    name: "Professional Camera Kit",
+    name: "Kit de Câmera Profissional",
     originalPrice: 1499.99,
     price: 1299.99,
     rating: 4.8,
   },
   {
-    category: "Furniture",
+    category: "Móveis",
     id: "4",
     image:
       "https://images.unsplash.com/photo-1506377295352-e3154d43ea9e?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
     inStock: true,
-    name: "Ergonomic Office Chair",
+    name: "Cadeira de Escritório Ergonômica",
     originalPrice: 299.99,
     price: 249.99,
     rating: 4.6,
   },
   {
-    category: "Electronics",
+    category: "Eletrônicos",
     id: "5",
     image:
       "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
@@ -94,12 +94,12 @@ const products: Product[] = [
     rating: 4.9,
   },
   {
-    category: "Electronics",
+    category: "Eletrônicos",
     id: "6",
     image:
       "https://images.unsplash.com/photo-1593784991095-a205069470b6?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
     inStock: true,
-    name: 'Ultra HD Smart TV 55"',
+    name: 'Smart TV Ultra HD 55"',
     originalPrice: 899.99,
     price: 799.99,
     rating: 4.7,
@@ -116,17 +116,17 @@ export default function ProductsPage() {
   /* ----------------------- Categories (derived) ------------------------- */
   const categories: Category[] = React.useMemo(() => {
     const dynamic = Array.from(new Set(products.map((p) => p.category))).sort();
-    return ["All", ...dynamic];
+    return ["Todos", ...dynamic];
   }, []);
 
   /* ----------------------------- State ---------------------------------- */
   const [selectedCategory, setSelectedCategory] =
-    React.useState<Category>("All");
+    React.useState<Category>("Todos");
 
   /* --------------------- Filtered products (memo) ----------------------- */
   const filteredProducts = React.useMemo(
     () =>
-      selectedCategory === "All"
+      selectedCategory === "Todos"
         ? products
         : products.filter((p) => p.category === selectedCategory),
     [selectedCategory],
@@ -175,9 +175,10 @@ export default function ProductsPage() {
             `}
           >
             <div>
-              <h1 className="text-3xl font-bold tracking-tight">Products</h1>
+              <h1 className="text-3xl font-bold tracking-tight">Produtos</h1>
               <p className="mt-1 text-lg text-muted-foreground">
-                Browse our latest products and find something you&apos;ll love.
+                Navegue pelos nossos produtos mais recentes e encontre algo que
+                você vai adorar.
               </p>
             </div>
 
@@ -190,7 +191,7 @@ export default function ProductsPage() {
                   key={slugify(category)}
                   onClick={() => setSelectedCategory(category)}
                   size="sm"
-                  title={`Filter by ${category}`}
+                  title={`Filtrar por ${category}`}
                   variant={
                     category === selectedCategory ? "default" : "outline"
                   }
@@ -206,15 +207,15 @@ export default function ProductsPage() {
             className={`
               grid grid-cols-1 gap-6
               sm:grid-cols-2
-              md:grid-cols-3
-              lg:grid-cols-4
+              lg:grid-cols-3
+              xl:grid-cols-4
             `}
           >
             {filteredProducts.map((product) => (
               <ProductCard
                 key={product.id}
-                onAddToCart={handleAddToCart}
-                onAddToWishlist={handleAddToWishlist}
+                onAddToCart={() => handleAddToCart(product.id)}
+                onAddToWishlist={() => handleAddToWishlist(product.id)}
                 product={product}
               />
             ))}
@@ -222,10 +223,23 @@ export default function ProductsPage() {
 
           {/* Empty state */}
           {filteredProducts.length === 0 && (
-            <div className="mt-8 text-center">
-              <p className="text-muted-foreground">
-                No products found in this category.
-              </p>
+            <div className="flex min-h-[400px] w-full flex-col items-center justify-center rounded-md border border-dashed p-8 text-center">
+              <div className="mx-auto flex max-w-md flex-col items-center text-center">
+                <h3 className="mt-4 text-lg font-semibold">
+                  Nenhum produto encontrado
+                </h3>
+                <p className="mb-4 mt-2 text-sm text-muted-foreground">
+                  Tente selecionar uma categoria diferente ou verifique
+                  novamente mais tarde.
+                </p>
+                <Button
+                  onClick={() => setSelectedCategory("Todos")}
+                  size="sm"
+                  variant="ghost"
+                >
+                  Limpar seleção
+                </Button>
+              </div>
             </div>
           )}
 

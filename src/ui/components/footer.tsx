@@ -33,8 +33,8 @@ export function Footer({ className }: { className?: string }) {
               </span>
             </Link>
             <p className="text-sm text-muted-foreground">
-              Your one-stop shop for everything tech. Premium products at
-              competitive prices.
+              Sua loja completa de tecnologia. Produtos premium a preços
+              competitivos.
             </p>
             <div className="flex space-x-4">
               <Button
@@ -80,7 +80,7 @@ export function Footer({ className }: { className?: string }) {
             </div>
           </div>
           <div>
-            <h3 className="mb-4 text-sm font-semibold">Shop</h3>
+            <h3 className="mb-4 text-sm font-semibold">Loja</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
@@ -90,7 +90,7 @@ export function Footer({ className }: { className?: string }) {
                   `}
                   href="/products"
                 >
-                  All Products
+                  Todos os Produtos
                 </Link>
               </li>
               <li>
@@ -101,7 +101,7 @@ export function Footer({ className }: { className?: string }) {
                   `}
                   href="/products?category=audio"
                 >
-                  Audio
+                  Áudio
                 </Link>
               </li>
               <li>
@@ -112,7 +112,7 @@ export function Footer({ className }: { className?: string }) {
                   `}
                   href="/products?category=wearables"
                 >
-                  Wearables
+                  Vestíveis
                 </Link>
               </li>
               <li>
@@ -140,7 +140,7 @@ export function Footer({ className }: { className?: string }) {
             </ul>
           </div>
           <div>
-            <h3 className="mb-4 text-sm font-semibold">Company</h3>
+            <h3 className="mb-4 text-sm font-semibold">Empresa</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
@@ -150,7 +150,7 @@ export function Footer({ className }: { className?: string }) {
                   `}
                   href="/about"
                 >
-                  About Us
+                  Sobre Nós
                 </Link>
               </li>
               <li>
@@ -161,7 +161,7 @@ export function Footer({ className }: { className?: string }) {
                   `}
                   href="/careers"
                 >
-                  Careers
+                  Carreiras
                 </Link>
               </li>
               <li>
@@ -183,7 +183,7 @@ export function Footer({ className }: { className?: string }) {
                   `}
                   href="/press"
                 >
-                  Press
+                  Imprensa
                 </Link>
               </li>
               <li>
@@ -194,13 +194,13 @@ export function Footer({ className }: { className?: string }) {
                   `}
                   href="/contact"
                 >
-                  Contact
+                  Contato
                 </Link>
               </li>
             </ul>
           </div>
           <div>
-            <h3 className="mb-4 text-sm font-semibold">Support</h3>
+            <h3 className="mb-4 text-sm font-semibold">Legal</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
@@ -208,31 +208,9 @@ export function Footer({ className }: { className?: string }) {
                     text-muted-foreground
                     hover:text-foreground
                   `}
-                  href="/help"
+                  href="/terms"
                 >
-                  Help Center
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className={`
-                    text-muted-foreground
-                    hover:text-foreground
-                  `}
-                  href="/shipping"
-                >
-                  Shipping & Returns
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className={`
-                    text-muted-foreground
-                    hover:text-foreground
-                  `}
-                  href="/warranty"
-                >
-                  Warranty
+                  Termos de Serviço
                 </Link>
               </li>
               <li>
@@ -243,7 +221,7 @@ export function Footer({ className }: { className?: string }) {
                   `}
                   href="/privacy"
                 >
-                  Privacy Policy
+                  Política de Privacidade
                 </Link>
               </li>
               <li>
@@ -252,44 +230,30 @@ export function Footer({ className }: { className?: string }) {
                     text-muted-foreground
                     hover:text-foreground
                   `}
-                  href="/terms"
+                  href="/shipping"
                 >
-                  Terms of Service
+                  Política de Envio
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className={`
+                    text-muted-foreground
+                    hover:text-foreground
+                  `}
+                  href="/returns"
+                >
+                  Política de Devolução
                 </Link>
               </li>
             </ul>
           </div>
         </div>
-        <div className="mt-12 border-t pt-8">
-          <div
-            className={`
-              flex flex-col items-center justify-between gap-4
-              md:flex-row
-            `}
-          >
-            <p className="text-sm text-muted-foreground">
-              &copy; {new Date().getFullYear()} {SEO_CONFIG.name}. All rights
-              reserved.
-            </p>
-            <div
-              className={
-                "flex items-center gap-4 text-sm text-muted-foreground"
-              }
-            >
-              <Link className="hover:text-foreground" href="/privacy">
-                Privacy
-              </Link>
-              <Link className="hover:text-foreground" href="/terms">
-                Terms
-              </Link>
-              <Link className="hover:text-foreground" href="/cookies">
-                Cookies
-              </Link>
-              <Link className="hover:text-foreground" href="/sitemap">
-                Sitemap
-              </Link>
-            </div>
-          </div>
+        <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
+          <p>
+            &copy; {new Date().getFullYear()} {SEO_CONFIG.name}. Todos os
+            direitos reservados.
+          </p>
         </div>
       </div>
     </footer>

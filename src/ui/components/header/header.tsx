@@ -27,14 +27,14 @@ export function Header({ showAuth = true }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const mainNavigation = [
-    { href: "/", name: "Home" },
-    { href: "/products", name: "Products" },
+    { href: "/", name: "Início" },
+    { href: "/products", name: "Produtos" },
   ];
 
   const dashboardNavigation = [
-    { href: "/dashboard/stats", name: "Stats" },
-    { href: "/dashboard/profile", name: "Profile" },
-    { href: "/dashboard/settings", name: "Settings" },
+    { href: "/dashboard/stats", name: "Estatísticas" },
+    { href: "/dashboard/profile", name: "Perfil" },
+    { href: "/dashboard/settings", name: "Configurações" },
     { href: "/dashboard/uploads", name: "Uploads" },
     { href: "/admin/summary", name: "Admin" },
   ];
@@ -149,11 +149,11 @@ export function Header({ showAuth = true }: HeaderProps) {
                   <div className="flex items-center gap-2">
                     <Link href="/auth/sign-in">
                       <Button size="sm" variant="ghost">
-                        Log in
+                        Entrar
                       </Button>
                     </Link>
                     <Link href="/auth/sign-up">
-                      <Button size="sm">Sign up</Button>
+                      <Button size="sm">Cadastrar</Button>
                     </Link>
                   </div>
                 )}
@@ -230,7 +230,7 @@ export function Header({ showAuth = true }: HeaderProps) {
                 href="/auth/sign-in"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Log in
+                Entrar
               </Link>
               <Link
                 className={`
@@ -241,7 +241,7 @@ export function Header({ showAuth = true }: HeaderProps) {
                 href="/auth/sign-up"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Sign up
+                Cadastrar
               </Link>
             </div>
           )}

@@ -20,27 +20,27 @@ import { categories, featuredProductsHomepage, testimonials } from "./mocks";
 const featuresWhyChooseUs = [
   {
     description:
-      "Free shipping on all orders over $50. Fast and reliable delivery to your doorstep.",
+      "Frete grátis em todos os pedidos acima de $50. Entrega rápida e confiável na sua porta.",
     icon: <Truck className="h-6 w-6 text-primary" />,
-    title: "Free Shipping",
+    title: "Frete Grátis",
   },
   {
     description:
-      "Your payment information is always safe and secure with us. We use industry-leading encryption.",
+      "Suas informações de pagamento estão sempre seguras conosco. Usamos criptografia líder do setor.",
     icon: <ShoppingBag className="h-6 w-6 text-primary" />,
-    title: "Secure Checkout",
+    title: "Checkout Seguro",
   },
   {
     description:
-      "Our customer support team is always available to help with any questions or concerns.",
+      "Nossa equipe de suporte ao cliente está sempre disponível para ajudar com qualquer dúvida ou preocupação.",
     icon: <Clock className="h-6 w-6 text-primary" />,
-    title: "24/7 Support",
+    title: "Suporte 24/7",
   },
   {
     description:
-      "We stand behind the quality of every product we sell. 30-day money-back guarantee.",
+      "Garantimos a qualidade de cada produto que vendemos. Garantia de devolução do dinheiro em 30 dias.",
     icon: <Star className="h-6 w-6 text-primary" />,
-    title: "Quality Guarantee",
+    title: "Garantia de Qualidade",
   },
 ];
 
@@ -92,14 +92,14 @@ export default function HomePage() {
                       lg:leading-[1.1]
                     `}
                   >
-                    Your One-Stop Shop for{" "}
+                    Sua Loja Completa de{" "}
                     <span
                       className={`
                         bg-gradient-to-r from-primary to-primary/70 bg-clip-text
                         text-transparent
                       `}
                     >
-                      Everything Tech
+                      Tecnologia
                     </span>
                   </h1>
                   <p
@@ -108,8 +108,8 @@ export default function HomePage() {
                       md:text-xl
                     `}
                   >
-                    Discover premium products at competitive prices, with fast
-                    shipping and exceptional customer service.
+                    Descubra produtos premium a preços competitivos, com frete
+                    rápido e atendimento ao cliente excepcional.
                   </p>
                 </div>
                 <div
@@ -125,7 +125,7 @@ export default function HomePage() {
                       `}
                       size="lg"
                     >
-                      Shop Now <ArrowRight className="h-4 w-4" />
+                      Comprar Agora <ArrowRight className="h-4 w-4" />
                     </Button>
                   </Link>
                   <Link href="/showcase">
@@ -134,7 +134,7 @@ export default function HomePage() {
                       size="lg"
                       variant="outline"
                     >
-                      View Showcase
+                      Ver Vitrine
                     </Button>
                   </Link>
                 </div>
@@ -145,11 +145,11 @@ export default function HomePage() {
                 >
                   <div className="flex items-center gap-1.5">
                     <Truck className="h-5 w-5 text-primary/70" />
-                    <span>Free shipping over $50</span>
+                    <span>Frete grátis acima de $50</span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <Clock className="h-5 w-5 text-primary/70" />
-                    <span>24/7 Customer Support</span>
+                    <span>Suporte ao Cliente 24/7</span>
                   </div>
                 </div>
               </div>
@@ -206,12 +206,12 @@ export default function HomePage() {
                   md:text-4xl
                 `}
               >
-                Shop by Category
+                Compre por Categoria
               </h2>
               <div className="mt-2 h-1 w-12 rounded-full bg-primary" />
               <p className="mt-4 max-w-2xl text-center text-muted-foreground">
-                Find the perfect device for your needs from our curated
-                collections
+                Encontre o dispositivo perfeito para suas necessidades em nossas
+                coleções selecionadas
               </p>
             </div>
             <div
@@ -222,7 +222,7 @@ export default function HomePage() {
             >
               {categories.map((category) => (
                 <Link
-                  aria-label={`Browse ${category.name} products`}
+                  aria-label={`Navegue pelos produtos de ${category.name}`}
                   className={`
                     group relative flex flex-col space-y-4 overflow-hidden
                     rounded-2xl border bg-card shadow transition-all
@@ -285,11 +285,11 @@ export default function HomePage() {
                   md:text-4xl
                 `}
               >
-                Featured Products
+                Produtos em Destaque
               </h2>
               <div className="mt-2 h-1 w-12 rounded-full bg-primary" />
               <p className="mt-4 max-w-2xl text-center text-muted-foreground">
-                Check out our latest and most popular tech items
+                Confira nossas novidades e os itens mais vendidos
               </p>
             </div>
             <div
@@ -342,7 +342,7 @@ export default function HomePage() {
                   md:text-4xl
                 `}
               >
-                Why Choose Us
+                Por que nos escolher?
               </h2>
               <div className="mt-2 h-1 w-12 rounded-full bg-primary" />
               <p
@@ -351,7 +351,8 @@ export default function HomePage() {
                   md:text-lg
                 `}
               >
-                We offer the best shopping experience with premium features
+                Estamos comprometidos em fornecer a melhor experiência de compra
+                possível
               </p>
             </div>
             <div
@@ -410,7 +411,7 @@ export default function HomePage() {
               className="py-0"
               description="Don't just take our word for it - hear from our satisfied customers"
               testimonials={testimonials}
-              title="What Our Customers Say"
+              title="O que nossos clientes dizem"
             />
           </div>
         </section>
@@ -448,7 +449,7 @@ export default function HomePage() {
                     md:text-4xl
                   `}
                 >
-                  Ready to Upgrade Your Tech?
+                  Pronto para começar?
                 </h2>
                 <p
                   className={`
@@ -456,9 +457,7 @@ export default function HomePage() {
                     md:text-xl
                   `}
                 >
-                  Join thousands of satisfied customers and experience the best
-                  tech products on the market. Sign up today for exclusive deals
-                  and offers.
+                  Crie sua conta e comece a comprar hoje mesmo.
                 </p>
                 <div
                   className={`
@@ -471,7 +470,7 @@ export default function HomePage() {
                       className="h-12 px-8 transition-colors duration-200"
                       size="lg"
                     >
-                      Sign Up Now
+                      Compre Agora
                     </Button>
                   </Link>
                   <Link href="/products">
