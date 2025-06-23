@@ -13,6 +13,10 @@ import { userTable } from "~/db/schema";
  */
 export async function getUserById(userId: string): Promise<null | User> {
   try {
+    if (!db) {
+      throw new Error("Database connection not available");
+    }
+
     const user = await db.query.userTable.findFirst({
       where: eq(userTable.id, userId),
     });

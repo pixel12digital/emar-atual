@@ -42,6 +42,10 @@ export const ourFileRouter = {
 
       // Save the upload details to the database
       try {
+        if (!db) {
+          throw new Error("Database connection not available");
+        }
+
         await db.insert(uploadsTable).values({
           id: createId(),
           key: file.key,
@@ -89,6 +93,10 @@ export const ourFileRouter = {
 
       // Save the upload details to the database
       try {
+        if (!db) {
+          throw new Error("Database connection not available");
+        }
+
         await db.insert(uploadsTable).values({
           id: createId(),
           key: file.key,

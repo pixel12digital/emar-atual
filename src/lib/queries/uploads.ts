@@ -9,6 +9,10 @@ import { uploadsTable, userTable } from "~/db/schema";
 // Fetch users and their uploads using manual joins
 export async function getUsersWithUploads(): Promise<UserWithUploads[]> {
   try {
+    if (!db) {
+      throw new Error("Database connection not available");
+    }
+
     const users = await db
       .select()
       .from(userTable)

@@ -7,13 +7,71 @@ import { polarCustomerTable, polarSubscriptionTable } from "~/db/schema";
 
 const polarClient = new Polar({
   accessToken: process.env.POLAR_ACCESS_TOKEN,
-  server: (process.env.POLAR_ENVIRONMENT as "production" | "sandbox") || "production",
+  server:
+    (process.env.POLAR_ENVIRONMENT as "production" | "sandbox") || "production",
 });
+
+/**
+ * Create a new customer in Polar and save reference in database
+ */
+export async function createCustomer(
+  userId: string,
+  email: string,
+  name?: string,
+) {
+  if (!db) {
+    throw new Error("Database connection not available");
+  }
+
+  try {
+    const customer = await polarClient.customers.create({
+      email,
+      externalId: userId,
+      name: name || email,
+    });
+
+    await db.insert(polarCustomerTable).values({
+      createdAt: new Date(),
+      customerId: customer.id,
+      id: uuidv4(),
+      updatedAt: new Date(),
+      userId,
+    });
+
+    return customer;
+  } catch (error) {
+    console.error("Error creating customer:", error);
+    throw error;
+  }
+}
+
+/**
+ * Get checkout URL for a specific product
+ */
+export async function getCheckoutUrl(
+  customerId: string,
+  productSlug: string,
+): Promise<null | string> {
+  try {
+    const checkout = await polarClient.checkouts.create({
+      customerId,
+      products: [productSlug],
+    });
+    return checkout.url;
+  } catch (error) {
+    console.error("Error generating checkout URL:", error);
+    return null;
+  }
+}
 
 /**
  * Get a Polar customer by user ID from the database
  */
 export async function getCustomerByUserId(userId: string) {
+  if (!db) {
+    throw new Error("Database connection not available");
+  }
+
   const customer = await db.query.polarCustomerTable.findFirst({
     where: eq(polarCustomerTable.userId, userId),
   });
@@ -30,13 +88,15 @@ export async function getCustomerByUserId(userId: string) {
  */
 export async function getCustomerState(userId: string) {
   const customer = await getCustomerByUserId(userId);
-  
+
   if (!customer) {
     return null;
   }
 
   try {
-    const customerState = await polarClient.customers.get({ id: customer.customerId });
+    const customerState = await polarClient.customers.get({
+      id: customer.customerId,
+    });
     return customerState;
   } catch (error) {
     console.error("Error fetching customer state:", error);
@@ -48,6 +108,10 @@ export async function getCustomerState(userId: string) {
  * Get all subscriptions for a user
  */
 export async function getUserSubscriptions(userId: string) {
+  if (!db) {
+    throw new Error("Database connection not available");
+  }
+
   const subscriptions = await db.query.polarSubscriptionTable.findMany({
     where: eq(polarSubscriptionTable.userId, userId),
   });
@@ -56,29 +120,11 @@ export async function getUserSubscriptions(userId: string) {
 }
 
 /**
- * Create a new customer in Polar and save reference in database
+ * Check if a user has an active subscription
  */
-export async function createCustomer(userId: string, email: string, name?: string) {
-  try {
-    const customer = await polarClient.customers.create({
-      email,
-      name: name || email,
-      externalId: userId,
-    });
-
-    await db.insert(polarCustomerTable).values({
-      id: uuidv4(),
-      userId,
-      customerId: customer.id,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    });
-
-    return customer;
-  } catch (error) {
-    console.error("Error creating customer:", error);
-    throw error;
-  }
+export async function hasActiveSubscription(userId: string): Promise<boolean> {
+  const subscriptions = await getUserSubscriptions(userId);
+  return subscriptions.some((sub) => sub.status === "active");
 }
 
 /**
@@ -91,10 +137,15 @@ export async function syncSubscription(
   productId: string,
   status: string,
 ) {
+  if (!db) {
+    throw new Error("Database connection not available");
+  }
+
   try {
-    const existingSubscription = await db.query.polarSubscriptionTable.findFirst({
-      where: eq(polarSubscriptionTable.subscriptionId, subscriptionId),
-    });
+    const existingSubscription =
+      await db.query.polarSubscriptionTable.findFirst({
+        where: eq(polarSubscriptionTable.subscriptionId, subscriptionId),
+      });
 
     if (existingSubscription) {
       await db
@@ -108,43 +159,19 @@ export async function syncSubscription(
     }
 
     const subscription = await db.insert(polarSubscriptionTable).values({
-      id: uuidv4(),
-      userId,
+      createdAt: new Date(),
       customerId,
-      subscriptionId,
+      id: uuidv4(),
       productId,
       status,
-      createdAt: new Date(),
+      subscriptionId,
       updatedAt: new Date(),
+      userId,
     });
 
     return subscription;
   } catch (error) {
     console.error("Error syncing subscription:", error);
     throw error;
-  }
-}
-
-/**
- * Check if a user has an active subscription
- */
-export async function hasActiveSubscription(userId: string): Promise<boolean> {
-  const subscriptions = await getUserSubscriptions(userId);
-  return subscriptions.some(sub => sub.status === "active");
-}
-
-/**
- * Get checkout URL for a specific product
- */
-export async function getCheckoutUrl(customerId: string, productSlug: string): Promise<string | null> {
-  try {
-    const checkout = await polarClient.checkouts.create({
-      customerId,
-      products: [productSlug],
-    });
-    return checkout.url;
-  } catch (error) {
-    console.error("Error generating checkout URL:", error);
-    return null;
   }
 }

@@ -48,6 +48,13 @@ export async function POST(req: Request) {
     const key = `url-${createId()}`;
 
     // Insert into database
+    if (!db) {
+      return NextResponse.json(
+        { message: "Database connection not available" },
+        { status: 500 },
+      );
+    }
+
     await db.insert(uploadsTable).values({
       createdAt: new Date(),
       id: createId(),
